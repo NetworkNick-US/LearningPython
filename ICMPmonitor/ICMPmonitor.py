@@ -1,0 +1,48 @@
+import json, datetime, os, platform, subprocess, time 
+
+class style():
+    BLACK = '\033[30m'
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
+    MAGENTA = '\033[35m'
+    CYAN = '\033[36m'
+    WHITE = '\033[37m'
+    UNDERLINE = '\033[4m'
+    RESET = '\033[0m'
+ 
+def clearConsole():
+    clearCon = 'cls' if platform.system().lower() == "windows" else 'clear'
+    os.system(clearCon)
+
+def openHostList(listname, timer):
+    with open(listname) as json_dictionary:
+        global dictionaryVariable
+        dictionaryVariable = json.load(json_dictionary)
+    LN = listname.split(".")
+    print('\x1b[1;37;46m' + "Pinging {}".format(LN[0]) + '\x1b[0m')
+    for host in dictionaryVariable:
+        pingHost(dictionaryVariable, host)
+    print("\n")
+    time.sleep(timer)    
+    
+def pingHost(dictionaryName, host):
+    pingParam = '-n' if platform.system().lower() == "windows" else '-c'
+    pingCommand = ['ping', pingParam, '1', dictionaryName[host]]
+    pingResponse = subprocess.Popen(pingCommand, stdout=subprocess.DEVNULL)
+    pingResponse.wait()
+    if pingResponse.returncode == 0:
+        print(style.GREEN + "{} is up".format(host.upper()) , "at" , dictionaryName[host])
+    else:
+        print(style.RED + "{} is unreachable".format(host), "at", dictionaryName[host])
+    
+try:
+    while(True):
+        os.system("")
+        openHostList("Home Devices.json",5)
+        
+        
+except KeyboardInterrupt:
+    clearConsole()
+    print("KeyboardInterrupt. Exiting script." + '\x1b[0m')
