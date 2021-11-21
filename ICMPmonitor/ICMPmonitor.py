@@ -18,7 +18,6 @@ def clearConsole():
 
 def openHostList(listname, timer):
     with open(listname) as json_dictionary:
-        global dictionaryVariable
         dictionaryVariable = json.load(json_dictionary)
     LN = listname.split(".")
     print('\x1b[1;37;46m' + "Pinging {}".format(LN[0]) + '\x1b[0m')
@@ -38,11 +37,10 @@ def pingHost(dictionaryName, host):
         print(style.RED + "{} is unreachable".format(host), "at", dictionaryName[host])
     
 try:
+    os.system("")
     while(True):
-        os.system("")
         openHostList("Home Devices.json",5)
-        
         
 except KeyboardInterrupt:
     clearConsole()
-    print("KeyboardInterrupt. Exiting script." + '\x1b[0m')
+    print("KeyboardInterrupt. Exiting script." + '\x1b[0m') 
