@@ -33,6 +33,7 @@ def findGPUS(targets):
 def scrapeWebpage(device,lcldictionary):
     getWebpage = requests.get(lcldictionary[device])
     if "<Response [200]>" not in str(getWebpage):
+        commError = style.WHITE + "[" + style.RED + "ERROR" + style.WHITE + "]"
         print(commError + " Could not locate: " + device)
     elif "ob=1&storeid=121" in str(getWebpage.text):
         #store 121 is in Cambridge, MA 
@@ -58,7 +59,6 @@ def sendSMS(notification):
 
 try:
     alertList = []
-    commError = style.WHITE + "[" + style.RED + "ERROR" + style.WHITE + "]"
     iterationCounter = 0
     os.system("")
     while(True):
