@@ -18,10 +18,10 @@ def alert(deviceName,lcldictionary):
     print(successMessage + "AVAILABLE DEVICE: " + deviceName)
     #check to see if we have already sent electronic alerts out for this item 
     if str(deviceName) not in alertList:
-        alertList.append(deviceName)
-        alertMessage = deviceName + " is in stock for pickup or online order at: " + lcldictionary[deviceName]
+                alertMessage = deviceName + " is in stock for pickup or online order at: " + lcldictionary[deviceName]
         sendSMS(alertMessage)
         print(successMessage + style.CYAN + "SMS alert sent to your local number")
+        alertList.append(deviceName)
         
 def findGPUS(targets):
     with open(targets) as json_target:
