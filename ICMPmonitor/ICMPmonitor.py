@@ -34,7 +34,7 @@ def pingHost(dictionaryName, host):
     if pingResponse.returncode == 0:
         print(style.GREEN + "{} is up".format(host.upper()) , "at" , dictionaryName[host])
     else:
-        print(style.RED + "{} is unreachable".format(host), "at", dictionaryName[host])
+        print(style.RED + "{} is unreachable".format(host.upper()), "at", dictionaryName[host])
     
 try:
     os.system("")
