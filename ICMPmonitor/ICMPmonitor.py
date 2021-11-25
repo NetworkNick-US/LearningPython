@@ -11,6 +11,7 @@ class style():
     WHITE = '\033[37m'
     UNDERLINE = '\033[4m'
     RESET = '\033[0m'
+    BLUEBACKGROUND = '\x1b[1;37;46m'
  
 def clearConsole():
     clearCon = 'cls' if platform.system().lower() == "windows" else 'clear'
@@ -20,7 +21,7 @@ def openHostList(listname, timer):
     with open(listname) as json_dictionary:
         dictionaryVariable = json.load(json_dictionary)
     LN = listname.split(".")
-    print('\x1b[1;37;46m' + "Pinging {}".format(LN[0]) + '\x1b[0m')
+    print(style.BLUEBACKGROUND + "Pinging {}".format(LN[0]) + '\x1b[0m')
     for host in dictionaryVariable:
         pingHost(dictionaryVariable, host)
     print("\n")
