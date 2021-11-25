@@ -21,7 +21,7 @@ def openHostList(listname, timer):
     with open(listname) as json_dictionary:
         dictionaryVariable = json.load(json_dictionary)
     LN = listname.split(".")
-    print(style.BLUEBACKGROUND + "Pinging {}".format(LN[0]) + '\x1b[0m')
+    print(style.BLUEBACKGROUND + "Pinging {}".format(LN[0]) + style.RESET)
     for host in dictionaryVariable:
         pingHost(dictionaryVariable, host)
     print("\n")
@@ -44,4 +44,4 @@ try:
         
 except KeyboardInterrupt:
     clearConsole()
-    print("KeyboardInterrupt. Exiting script." + '\x1b[0m') 
+    print("KeyboardInterrupt. Exiting script." + style.RESET) 
