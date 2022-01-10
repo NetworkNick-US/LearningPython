@@ -1,2 +1,2 @@
 # NetworkAdvantage
-Tracking my network focused Python and Ansible projects!
+Tracking my network focused Python projects!
