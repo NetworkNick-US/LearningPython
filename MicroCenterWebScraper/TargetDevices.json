@@ -1,5 +1,6 @@
 {
 	"Dell XPS 8940 - i7-11700 - 3060" : "https://www.microcenter.com/product/637044/dell-xps-8940-gaming-pc-platinum-collection?ob=1",
 	"Lenovo Legion T5 - i7-10700 - 2060" : "https://www.microcenter.com/product/638680/lenovo-legion-t5-28imb05-gaming-pc-factory-refurbished?ob=1",
-	"Asus STrix GA15 - 5600x - 3080" : "https://www.microcenter.com/product/644204/asus-rog-strix-ga15-gaming-pc-platinum-collection"
+	"Asus STrix GA15 - 5600x - 3080" : "https://www.microcenter.com/product/644204/asus-rog-strix-ga15-gaming-pc-platinum-collection",
+	"Non-existant Component" : "https://www.microcenter.com/product/604/asus-rog-strix-ga15-gaming-pc-platinum-collection"
 }

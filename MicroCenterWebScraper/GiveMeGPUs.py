@@ -19,7 +19,7 @@ def alert(deviceName,lcldictionary):
     #check to see if we have already sent electronic alerts out for this item 
     if str(deviceName) not in alertList:
         alertMessage = deviceName + " is in stock for pickup or online order at: " + lcldictionary[deviceName]
-        sendSMS(alertMessage)
+        #sendSMS(alertMessage)
         print(successMessage + style.CYAN + "SMS alert sent to your local number")
         alertList.append(deviceName)
         
