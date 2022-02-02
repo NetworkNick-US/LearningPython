@@ -1,8 +1,12 @@
+import getpass
+import os
+import platform
+import time
+
 from netmiko import ConnectHandler
-import getpass, os, platform, time, datetime
 
 
-class style():
+class style:
     BLACK = '\033[30m'
     RED = '\033[31m'
     GREEN = '\033[32m'
@@ -29,8 +33,8 @@ def collectInfo():
     networkDevice['password'] = getpass.getpass("Enter your password:", stream=None)
     networkDevice['secret'] = getpass.getpass("Enter the device's enable password:", stream=None)
     print(style.BLUEBACKGROUND + "\nPlease enter the interface that you wish to bounce." + style.RESET)
-    global suppliedInterface
-    suppliedInterface = input("Please note - you can use acceptable abbreviations Gi,Te,Eth,etc.: ")
+    networkDevice['inter'] = "interface " + input("Please note - you can use acceptable abbreviations Gi,Te,Eth,etc.: ")
+
 
 networkDevice = {
     'device_type': 'cisco_ios',
@@ -38,7 +42,8 @@ networkDevice = {
     'username': 'un',
     'password': 'pw',
     'port': 22,
-    'secret': 'suprise',
+    'secret': 'surprise',
+    'inter': "Ethernet999",
 }
 
 try:
@@ -47,17 +52,23 @@ try:
     # start SSH session
     network_connection = ConnectHandler(**networkDevice)
 
-    print(style.BLUE + "We are going to be shutting down interface " + str(suppliedInterface) +
-        " and waiting 5 seconds before turning it back on" + style.RESET)
+    print(style.BLUE + "We are going to be shutting down " + networkDevice['inter'] +
+          " and waiting 5 seconds before turning it back on" + style.RESET)
     userConfirm = input(style.RED + "WARNING: IF YOUR UPLINK TO THE NETWORK DEVICE USES THE ABOVE INTERFACE,"
-        "THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n"
-        "Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
+                                    "THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n"
+                                    "Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
     if userConfirm.upper() == "YES" or userConfirm.upper() == "Y":
         network_connection.enable()
         network_connection.send_command("configure terminal")
-        network_connection.send_command("")
-        # Future use - readability but no delay after shutdown:
-        # config_commands = [suppliedInterface, "shutdown", "no shutdown"]
+        network_connection.send_command(networkDevice['inter'])
+        network_connection.send_command("shutdown")
+        print("Shutdown command issued. Waiting 5 seconds before re-enabling the interface.")
+        time.sleep(5)
+        network_connection.send_command("no shutdown")
+        network_connection.send_command("end")
+        network_connection.disconnect()
+        # Future use - readability - auto-enters config mode but no delay after shutdown:
+        # config_commands = [networkDevice['inter'], "shutdown", "no shutdown"]
         # network_connection.send_config_set(config_commands)
     else:
         network_connection.disconnect()
