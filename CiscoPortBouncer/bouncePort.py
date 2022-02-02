@@ -1,6 +1,7 @@
 from netmiko import ConnectHandler
 import getpass, os, platform, time, datetime
 
+
 class style():
     BLACK = '\033[30m'
     RED = '\033[31m'
@@ -14,42 +15,56 @@ class style():
     RESET = '\033[0m'
     BLUEBACKGROUND = '\x1b[1;37;46m'
 
+
 def clearConsole():
     clearCon = 'cls' if platform.system().lower() == "windows" else 'clear'
     os.system(clearCon)
 
+
+def collectInfo():
+    # collect real device information
+    print(style.BLUEBACKGROUND + "\n----Please enter your credentials to the network device----\n" + style.RESET)
+    networkDevice['host'] = input("Please enter the IP address or hostname of the network device: ")
+    networkDevice['username'] = input("Enter your username: ")
+    networkDevice['password'] = getpass.getpass("Enter your password:", stream=None)
+    networkDevice['secret'] = getpass.getpass("Enter the device's enable password:", stream=None)
+    print(style.BLUEBACKGROUND + "\nPlease enter the interface that you wish to bounce." + style.RESET)
+    global suppliedInterface
+    suppliedInterface = input("Please note - you can use acceptable abbreviations Gi,Te,Eth,etc.: ")
+
 networkDevice = {
     'device_type': 'cisco_ios',
-    'host':   '192.168.255.10',
+    'host': '192.168.255.10',
     'username': 'un',
     'password': 'pw',
-    'port' : 22,
+    'port': 22,
     'secret': 'suprise',
 }
 
 try:
     os.system("")
-
-    #collect real credentials
-    print("Please enter your credentials to the network device:")
-    networkDevice['username'] = input("Enter your username:\n")
-    networkDevice['password'] = getpass.getpass("Enter your password:",stream=None)
-    networkDevice['secret'] = getpass.getpass("Enter the device's enable password:", stream=None)
-
-    #start SSH session
+    collectInfo()
+    # start SSH session
     network_connection = ConnectHandler(**networkDevice)
 
-    print(style.BLUE + "We are going to be shutting down interface {} and waiting 5 seconds before turning it back on".format(suppliedInterface) + style.RESET)
-    userConfirm = input(style.RED + "WARNING: IF YOUR UPLINK TO THE NETWORK DEVICE USES THE ABOVE INTERFACE, THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
-    if userConfirm.upper() == "YES":
-        #Future use - readability but no delay after shutdown:
-        #config_commands = [suppliedInterface, "shutdown", "no shutdown"]
-        #network_connection.send_config_set(config_commands)
+    print(style.BLUE + "We are going to be shutting down interface " + str(suppliedInterface) +
+        " and waiting 5 seconds before turning it back on" + style.RESET)
+    userConfirm = input(style.RED + "WARNING: IF YOUR UPLINK TO THE NETWORK DEVICE USES THE ABOVE INTERFACE,"
+        "THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n"
+        "Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
+    if userConfirm.upper() == "YES" or userConfirm.upper() == "Y":
+        network_connection.enable()
+        network_connection.send_command("configure terminal")
+        network_connection.send_command("")
+        # Future use - readability but no delay after shutdown:
+        # config_commands = [suppliedInterface, "shutdown", "no shutdown"]
+        # network_connection.send_config_set(config_commands)
     else:
         network_connection.disconnect()
         clearConsole()
         print("Script aborted. No actions have been performed on the remote device")
+        print("Feel free to try again... (╯°□°)╯︵ ┻━┻")
 
 except KeyboardInterrupt:
     clearConsole()
-    print(style.RED + "KeyboardInterrupt. Exiting script." + style.RESET)
+    print(style.RED + "KeyboardInterrupt. Exiting script.... (╯°□°)╯︵ ┻━┻" + style.RESET)
