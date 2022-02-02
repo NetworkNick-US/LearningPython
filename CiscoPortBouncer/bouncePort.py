@@ -53,7 +53,7 @@ try:
     network_connection = ConnectHandler(**networkDevice)
 
     print(style.BLUE + "We are going to be shutting down " + networkDevice['inter'] +
-          " and waiting 5 seconds before turning it back on" + style.RESET)
+                        " and waiting 5 seconds before turning it back on" + style.RESET)
     userConfirm = input(style.RED + "WARNING: IF YOUR UPLINK TO THE NETWORK DEVICE USES THE ABOVE INTERFACE,"
                                     "THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n"
                                     "Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
