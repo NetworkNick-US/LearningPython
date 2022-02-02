@@ -30,8 +30,8 @@ def collectInfo():
     print(style.BLUEBACKGROUND + "\n----Please enter your credentials to the network device----\n" + style.RESET)
     networkDevice['host'] = input("Please enter the IP address or hostname of the network device: ")
     networkDevice['username'] = input("Enter your username: ")
-    networkDevice['password'] = getpass.getpass("Enter your password:", stream=None)
-    networkDevice['secret'] = getpass.getpass("Enter the device's enable password:", stream=None)
+    networkDevice['password'] = getpass.getpass("Enter your password: ", stream=None)
+    networkDevice['secret'] = getpass.getpass("Enter the device's enable password: ", stream=None)
     print(style.BLUEBACKGROUND + "\nPlease enter the interface that you wish to bounce." + style.RESET)
     networkDevice['inter'] = "interface " + input("Please note - you can use acceptable abbreviations Gi,Te,Eth,etc.: ")
 
