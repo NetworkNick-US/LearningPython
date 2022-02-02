@@ -29,7 +29,6 @@ networkDevice = {
 
 try:
     os.system("")
-    os.system("")
 
     #collect real credentials
     print("Please enter your credentials to the network device:")
