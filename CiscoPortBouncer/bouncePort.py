@@ -13,6 +13,10 @@ class style():
     RESET = '\033[0m'
     BLUEBACKGROUND = '\x1b[1;37;46m'
 
+def clearConsole():
+    clearCon = 'cls' if platform.system().lower() == "windows" else 'clear'
+    os.system(clearCon)
+
 networkDevice = {
     'device_type': 'cisco_ios',
     'host':   '192.168.255.10',
@@ -31,4 +35,5 @@ if str(userConfirm).upper() == "YES":
     #config_commands = [suppliedInterface, "shutdown", "no shutdown"]
     #network_connection.send_config_set(config_commands)
 else:
+    clearConsole()
     print("Script aborted. No actions have been performed on the remote device")
