@@ -26,14 +26,20 @@ networkDevice = {
     'secret': 'suprise',
 }
 
-network_connection = ConnectHandler(**networkDevice)
+try:
+    os.system("")
+    network_connection = ConnectHandler(**networkDevice)
 
-print(style.BLUE + "We are going to be shutting down interface {} and waiting 5 seconds before turning it back on".format(suppliedInterface) + style.RESET)
-userConfirm = input(style.RED + "WARNING: IF YOUR UPLINK TO THE NETWORK DEVICE USES THE ABOVE INTERFACE, THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
-if str(userConfirm).upper() == "YES":
-    #Future use - readability but no delay after shutdown:
-    #config_commands = [suppliedInterface, "shutdown", "no shutdown"]
-    #network_connection.send_config_set(config_commands)
-else:
+    print(style.BLUE + "We are going to be shutting down interface {} and waiting 5 seconds before turning it back on".format(suppliedInterface) + style.RESET)
+    userConfirm = input(style.RED + "WARNING: IF YOUR UPLINK TO THE NETWORK DEVICE USES THE ABOVE INTERFACE, THIS SCRIPT WILL BREAK YOUR CONNECTION TO THE REMOTE DEVICE.\n Please enter 'YES' to confirm that you want to proceed. [NO]\n" + style.RESET)
+    if str(userConfirm).upper() == "YES":
+        #Future use - readability but no delay after shutdown:
+        #config_commands = [suppliedInterface, "shutdown", "no shutdown"]
+        #network_connection.send_config_set(config_commands)
+    else:
+        clearConsole()
+        print("Script aborted. No actions have been performed on the remote device")
+
+except KeyboardInterrupt:
     clearConsole()
-    print("Script aborted. No actions have been performed on the remote device")
+    print(style.RED + "KeyboardInterrupt. Exiting script." + style.RESET)
