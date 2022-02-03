@@ -26,7 +26,7 @@ try:
     salt = getpass.getpass(prompt="Please enter a random string as your salt: ", stream=None)
     userpasswd = getpass.getpass(prompt="Password: ", stream=None)
     print("The value you should be using for your variable 'fallbackAdminPW' is: " + hashPass(salt,userpasswd))
-    input(style.BLUE + "\nVisit NetworkNick.___ for more Ansible and Python tools!\n" + style.RESET)
+    input(style.BLUE + "\nVisit NetworkNick.us for more Ansible and Python tools!\n" + style.RESET)
 
 except KeyboardInterrupt:
     clearConsole()
