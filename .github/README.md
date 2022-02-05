@@ -1,4 +1,4 @@
-# LearningPython
+# PythonScripts
 A collection of my scripts as I use Python to solve some basic tasks! This collection is not maintained for production use but is instead catered for my testing and learning/development.
 
 ## Scripts
