@@ -32,4 +32,4 @@ class CiscoRTR(CiscoBase):
             
 CoreRTR = CiscoRTR("Core1", "192.168.255.254", "cisco-ios", "localAdmin", "SuperSecure123!!")
 CoreRTR.populate_interface_list()
-print(CoreRTR.interface_list))
+print(CoreRTR.interface_list)
