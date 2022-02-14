@@ -6,15 +6,15 @@ class Cisco:
 
     def __init__(self, hostname, ip, device_type, username, password):
 
-        self.hostname == hostname
+        self.hostname = hostname
         self.connection_data = {
-            'ip' : ip,
+            'ip': ip,
             'device_type': device_type,
             'username': username,
             'password': password
         }
 
-        def login(self)
+        def login(self):
             self.conn = netmiko.ConnectHandler(**self.connection_data)
 
 
