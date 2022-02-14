@@ -5,7 +5,6 @@ import getpass
 class CiscoBase:
 
     def __init__(self, hostname, ip, device_type, username, password):
-
         self.hostname = hostname
         self.connection_data = {
             'ip': ip,
@@ -16,6 +15,7 @@ class CiscoBase:
 
     def login(self):
         self.connect = netmiko.ConnectHandler(**self.connection_data)
+
 
 class CiscoIOSXE(CiscoBase):
 
