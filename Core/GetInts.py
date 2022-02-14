@@ -2,7 +2,9 @@ import netmiko
 
 class CiscoBase:
 
+    
     def __init__(self, hostname, ip, device_type=None, username=None, password=None):
+        
         self.hostname = hostname
         self.connection_data = {
             'ip': ip,
@@ -12,11 +14,13 @@ class CiscoBase:
         }
 
     def login(self):
+        
         return netmiko.ConnectHandler(**self.connection_data)
 
 
 class CiscoRTR(CiscoBase):
 
+    
     def populate_interface_list(self):
 
         connect = self.login()
@@ -25,6 +29,7 @@ class CiscoRTR(CiscoBase):
         for int in sh_ip_int_brief:
             self.interface_list.append(interface['int'])
 
+            
 CoreRTR = CiscoRTR("Core1", "192.168.255.254", "cisco-ios", "localAdmin", "SuperSecure123!!")
 CoreRTR.populate_interface_list()
 print(CoreRTR.interface_list))
