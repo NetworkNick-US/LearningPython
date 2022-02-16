@@ -14,4 +14,4 @@ Script              | Features | Status
 | :-------------      | --------- |-----------| 
 | [Network Port Bouncer](https://github.com/NetworkNick-US/LearningPython/blob/main/CiscoPortBouncer/bouncePort.py) | Reset a port that has been tripped by port-security  | ✔️        |
 | [Running Config and Local Log](https://github.com/NetworkNick-US/PythonScripts/blob/main/Netmiko/getRunLog.py) | Connect to a network device and print the running config and the log | ✔️        |
-| [Get Interface list](127.0.0.1) | Connect to a device and parse the interfaces into a basic list | ✔️        |
+| [Get Interface list](https://github.com/NetworkNick-US/PythonScripts/blob/main/Netmiko/GetInts.py) | Connect to a device and parse the interfaces into a basic list | ✔️        |
