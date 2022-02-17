@@ -1,6 +1,11 @@
-import json, datetime, os, platform, subprocess, time 
+import json
+import os
+import platform
+import subprocess
+import time
 
-class style():
+
+class Style:
     BLACK = '\033[30m'
     RED = '\033[31m'
     GREEN = '\033[32m'
@@ -12,36 +17,40 @@ class style():
     UNDERLINE = '\033[4m'
     RESET = '\033[0m'
     BLUEBACKGROUND = '\x1b[1;37;46m'
- 
-def clearConsole():
-    clearCon = 'cls' if platform.system().lower() == "windows" else 'clear'
-    os.system(clearCon)
 
-def openHostList(listname, timer):
-    with open(listname) as json_dictionary:
-        dictionaryVariable = json.load(json_dictionary)
-    LN = listname.split(".")
-    print(style.BLUEBACKGROUND + "Pinging {}".format(LN[0]) + style.RESET)
-    for host in dictionaryVariable:
-        pingHost(dictionaryVariable, host)
+
+def clear_console():
+    clear_con = 'cls' if platform.system().lower() == "windows" else 'clear'
+    os.system(clear_con)
+
+
+def open_host_list(list_name, timer):
+    with open(list_name) as json_dictionary:
+        dictionary_variable = json.load(json_dictionary)
+    ln = list_name.split(".")
+    print(Style.BLUEBACKGROUND + "Pinging {}".format(ln[0]) + Style.RESET)
+    for host in dictionary_variable:
+        ping_host(dictionary_variable, host)
     print("\n")
-    time.sleep(timer)    
-    
-def pingHost(dictionaryName, host):
-    pingParam = '-n' if platform.system().lower() == "windows" else '-c'
-    pingCommand = ['ping', pingParam, '1', dictionaryName[host]]
-    pingResponse = subprocess.Popen(pingCommand, stdout=subprocess.DEVNULL)
-    pingResponse.wait()
-    if pingResponse.returncode == 0:
-        print(style.GREEN + "{} is up".format(host.upper()) , "at" , dictionaryName[host])
+    time.sleep(timer)
+
+
+def ping_host(dictionary_name, host):
+    ping_param = '-n' if platform.system().lower() == "windows" else '-c'
+    ping_command = ['ping', ping_param, '1', dictionary_name[host]]
+    ping_response = subprocess.Popen(ping_command, stdout=subprocess.DEVNULL)
+    ping_response.wait()
+    if ping_response.returncode == 0:
+        print(Style.GREEN + "{} is up".format(host.upper()), "at", dictionary_name[host])
     else:
-        print(style.RED + "{} is unreachable".format(host.upper()), "at", dictionaryName[host])
-    
+        print(Style.RED + "{} is unreachable".format(host.upper()), "at", dictionary_name[host])
+
+
 try:
     os.system("")
-    while(True):
-        openHostList("Home Devices.json",5)
-        
+    while True:
+        open_host_list("Home Devices.json", 5)
+
 except KeyboardInterrupt:
-    clearConsole()
-    print("KeyboardInterrupt. Exiting script." + style.RESET) 
+    clear_console()
+    print("KeyboardInterrupt. Exiting script." + Style.RESET)
