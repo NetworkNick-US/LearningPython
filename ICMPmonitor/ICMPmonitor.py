@@ -28,7 +28,7 @@ def open_host_list(list_name, timer):
     with open(list_name) as json_dictionary:
         dictionary_variable = json.load(json_dictionary)
     ln = list_name.split(".")
-    print(Style.BLUEBACKGROUND + "Pinging {}".format(ln[0]) + Style.RESET)
+    print(Style.BLUEBACKGROUND + f"Pinging {ln[0]}" + Style.RESET)
     for host in dictionary_variable:
         ping_host(dictionary_variable, host)
     print("\n")
@@ -41,9 +41,9 @@ def ping_host(dictionary_name, host):
     ping_response = subprocess.Popen(ping_command, stdout=subprocess.DEVNULL)
     ping_response.wait()
     if ping_response.returncode == 0:
-        print(Style.GREEN + "{} is up".format(host.upper()), "at", dictionary_name[host])
+        print(Style.GREEN + f"{host.upper()} is up at", dictionary_name[host])
     else:
-        print(Style.RED + "{} is unreachable".format(host.upper()), "at", dictionary_name[host])
+        print(Style.RED + f"{host.upper()} is unreachable at", dictionary_name[host])
 
 
 try:
@@ -53,4 +53,4 @@ try:
 
 except KeyboardInterrupt:
     clear_console()
-    print("KeyboardInterrupt. Exiting script." + Style.RESET)
+    print(Style.RED + "KeyboardInterrupt. Exiting script." + Style.RESET)
