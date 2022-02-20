@@ -16,3 +16,4 @@ A collection of my scripts as I use Python to solve some basic tasks! This colle
 | [Running Config and Local Log](https://github.com/NetworkNick-US/PythonScripts/blob/main/Netmiko/getRunLog.py) | Connect to a network device and print the running config and the log | ✔️        |
 | [Get Interface list](https://github.com/NetworkNick-US/PythonScripts/blob/main/Netmiko/GetInts.py) | Connect to a device and parse the interfaces into a basic list | ✔️        |
 | [Hostnames](https://github.com/NetworkNick-US/PythonScripts/blob/main/Netmiko/getHostname.py) | Given a list of IP addresses, get device hostnames and create a directory for each |  ✔️        |
+| [Configuration Backup](https://github.com/NetworkNick-US/PythonScripts/blob/main/Netmiko/backupConfig.py) | Backs up the output of 'show run' and 'show log' to a local file. Iterated over a list of management addresses |  ✔️        |
