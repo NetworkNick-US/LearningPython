@@ -26,4 +26,5 @@ for IP in ip_list:
 for network_device in device_list:
     base_directory = os.getcwd() + '/network/'
     specific_directory = base_directory + network_device.hostname + '/'
-    os.mkdir(specific_directory)
+    if not(os.path.exists(specific_directory)) and os.path.isdir(specific_directory):
+        os.mkdir(specific_directory)
