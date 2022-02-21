@@ -27,9 +27,9 @@ class CiscoRTR(CiscoBase):
 
         connect = self.login()
         sh_ip_int_brief = connect.send_command("show ip int brief", use_textfsm=True)
-        interface_list = []
-        for int in sh_ip_int_brief:
-            self.interface_list.append(interface['int'])
+        self.interface_list = []
+        for interface in sh_ip_int_brief:
+            self.interface_list.append(interface['intf'])
 
             
 CoreRTR = CiscoRTR("Core1", "192.168.255.254", "cisco-ios", "localAdmin", "SuperSecure123!!")
