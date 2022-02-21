@@ -6,6 +6,8 @@ class Cisco:
     def __init__(self, ip, port=22, username=None, password=None, device_type='cisco_ios'):
         self.connect = netmiko.ConnectHandler(ip=ip, port=port, username=username,
                                               password=password, device_type=device_type)
+        _ = self.connect.send_command('show run | inc hostname')
+        self.hostname = _.split()[-1]
 
     def get_output(self, command='show run', textFSM=False):
         return self.connect.send_command(command, use_textFSM=textFSM)
