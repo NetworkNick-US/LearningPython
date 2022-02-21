@@ -1,6 +1,6 @@
 import netmiko
 import pandas
-import os
+
 
 class CiscoIOS():
 
@@ -31,17 +31,21 @@ managed_devices = [
 def main():
     network_devices = []
     version_list = []
+    uptime_list = []
     for ip in managed_devices:
         net_connection = CiscoIOS(ip, username="MyUsername", password="MyPassword")
         sh_version = net_connection.get_IOS_version()
         hostname = sh_version['hostname']
         version = f"{sh_version['rommon']} {sh_version['version']}"
+        uptime = sh_version['uptime']
         network_devices.append(hostname)
         version_list.append(version)
+        uptime_list.append(uptime)
 
     network_data = pandas.DateFrame()
     network_data['hostname'] = network_devices
     network_data['version'] = version_list
+    network_data['uptime'] = uptime_list
     print(network_data)
 
 if __name__ == '__main__':
