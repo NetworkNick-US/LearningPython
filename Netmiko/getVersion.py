@@ -43,10 +43,11 @@ def main():
         uptime_list.append(uptime)
 
     network_data = pandas.DateFrame()
-    network_data['hostname'] = network_devices
-    network_data['version'] = version_list
-    network_data['uptime'] = uptime_list
+    network_data['Hostname'] = network_devices
+    network_data['Version'] = version_list
+    network_data['Uptime'] = uptime_list
     print(network_data)
+    network_data.to_csv("version_info.csv", index=False)
 
 if __name__ == '__main__':
     main()
