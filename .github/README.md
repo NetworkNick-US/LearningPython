@@ -24,3 +24,4 @@ A collection of my scripts as I use Python to solve some basic tasks! This colle
 | Script                                                                                                   | Goal                                                         | Status |
 |:---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|--------|
 | [Router Interface IPs](https://github.com/NetworkNick-US/PythonScripts/blob/main/Requests/RouterInts.py) | Get request to get remote router interfaces and IP addresses | ✔️     |
+| [Argument Parser](https://github.com/NetworkNick-US/PythonScripts/blob/main/TestBed/Arguments.py) | Get network device information from arguments on the CLI |  ✔️     |
