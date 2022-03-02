@@ -7,8 +7,8 @@ class CiscoIOS:
     def __init__(self, ip, port=22, username=None, password=None, device_type='cisco_ios'):
         self.connect = netmiko.ConnectHandler(ip=ip, port=port, username=username, password=password,
                                               device_type=device_type)
-        cmd1 = self.connect.send_command('show run | inc hostname')
-        self.hostname = cmd1.split()[-1]
+        _ = self.connect.send_command('show run | inc hostname')
+        self.hostname = _.split()[-1]
 
     def get_run_cfg(self):
         running_configuration = self.connect.send_command('show run')
